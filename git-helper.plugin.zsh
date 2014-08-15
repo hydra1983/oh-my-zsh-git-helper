@@ -19,13 +19,13 @@ function _git_helper_push_2_all {
 	git push origin --all
 }
 
-function gacp2all {
+function ghacp2all {
 	_git_helper_add_all
 	_git_helper_commit $1
 	_git_helper_push_2_all
 }
 
-function gacp2om {
+function ghacp2om {
 	_git_helper_add_all
 	_git_helper_commit $1
 	_git_helper_push_2_origin_master
