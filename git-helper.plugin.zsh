@@ -1,8 +1,8 @@
-function __add_all__ {
+function _git_helper_add_all {
 	git add -A .
 }
 
-function __commit__ {
+function _git_helper_commit {
 	if [[ "$1" == "" ]] ; then
 		message="update"
 	else
@@ -11,22 +11,22 @@ function __commit__ {
 	git commit -m "$message"
 }
 
-function __push_2_origin_master__ {
+function _git_helper_push_2_origin_master {
 	git push origin master
 }
 
-function __push_all__ {
+function _git_helper_push_2_all {
 	git push origin --all
 }
 
 function gacp2all {
-		__add_all__
-		__commit__ $1
-		__push_all__
+	_git_helper_add_all
+	_git_helper_commit $1
+	_git_helper_push_2_all
 }
 
 function gacp2om {
-	__add_all__
-	__commit__ $1
-	__push_2_origin_master__
+	_git_helper_add_all
+	_git_helper_commit $1
+	_git_helper_push_2_origin_master
 }
