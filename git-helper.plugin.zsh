@@ -19,6 +19,14 @@ function _git_helper_push_2_all {
 	git push origin --all
 }
 
+function _git_helper_replace_user_email_push_2_origin_master {
+	user_name=$1
+	user_email=$2
+
+	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='$user_name'; GIT_AUTHOR_EMAIL='$user_email'; GIT_COMMITTER_NAME='$user_name'; GIT_COMMITTER_EMAIL='$user_email';" HEAD
+	git push -f origin master
+}
+
 function ghacp2all {
 	_git_helper_add_all
 	_git_helper_commit $1
@@ -29,4 +37,8 @@ function ghacp2om {
 	_git_helper_add_all
 	_git_helper_commit $1
 	_git_helper_push_2_origin_master
+}
+
+function ghrnep@om {
+	_git_helper_replace_name_email_push_2_origin_master
 }
