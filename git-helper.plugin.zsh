@@ -27,6 +27,15 @@ function _git_helper_replace_name_email_push_2_origin_master {
 	git push -f origin master
 }
 
+function _git_remote_add_origin {
+	remote_url=$1
+
+	if [[ "$remote_url" != "" ]] ; then
+		git remote remove origin
+		git remote add origin $remote_url
+	fi	
+}
+
 function ghacp2all {
 	_git_helper_add_all
 	_git_helper_commit $1
@@ -41,4 +50,8 @@ function ghacp2om {
 
 function ghrnep2om {
 	_git_helper_replace_name_email_push_2_origin_master $1 $2
+}
+
+function ghrao {
+	_git_remote_add_origin
 }
