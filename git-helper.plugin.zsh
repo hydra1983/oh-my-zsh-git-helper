@@ -66,7 +66,7 @@ function ghrao {
 }
 
 function ghu {
-	pushd $_gh_helper_base
+	cd $_gh_helper_base
 	ghacp2om
-	popd
+	cd -
 }
