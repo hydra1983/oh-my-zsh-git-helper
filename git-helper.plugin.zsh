@@ -65,7 +65,7 @@ function ghrao {
 	_git_remote_add origin $1
 }
 
-function ghu {
+function _ghacp2om {
 	cd $_gh_helper_base
 	ghacp2om
 	cd -
