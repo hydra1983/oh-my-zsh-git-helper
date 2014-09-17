@@ -72,8 +72,6 @@ function _ghacp2om_usage {
 function _ghacp2om_exec() {
 	dir=$1
 	message=$2
-	echo $dir
-	echo $message
 	if [[ "$dir" = "" ]] ; then
 		pushd $_gh_helper_base 1> /dev/null
 			ghacp2om $message
