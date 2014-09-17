@@ -66,7 +66,27 @@ function ghrao {
 }
 
 function _ghacp2om {
-	cd $_gh_helper_base
-	ghacp2om
-	cd -
+	dir=$1
+	if [[ "$dir" = "" ]] ; then
+		pushd $_gh_helper_base 1> /dev/null
+			ghacp2om
+		popd 1> /dev/null
+	else
+		isPath=$(echo "$dir"|grep ^\/)
+		if [[ "$isPath" == "" ]] ; then
+			pluginName=$dir
+			pluginDir=$_gh_helper_base/../$pluginName
+			if [ -d $pluginDir -a -d $pluginDir/.git ] ; then
+				pushd $pluginDir 1> /dev/null
+				ghacp2om
+				popd 1> /dev/null
+			fi
+		else
+			if [ -d $dir -a -d $dir/.git ] ; then
+				pushd $dir 1> /dev/null
+				ghacp2om
+				popd 1> /dev/null
+			fi
+		fi
+	fi
 }
