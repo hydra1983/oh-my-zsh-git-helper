@@ -65,11 +65,18 @@ function ghrao {
 	_git_remote_add origin $1
 }
 
-function _ghacp2om {
+function _ghacp2om_usage {
+	
+}
+
+function _ghacp2om_exec() {
 	dir=$1
+	message=$2
+	echo $dir
+	echo $message
 	if [[ "$dir" = "" ]] ; then
 		pushd $_gh_helper_base 1> /dev/null
-			ghacp2om
+			ghacp2om $message
 		popd 1> /dev/null
 	else
 		isPath=$(echo "$dir"|grep ^\/)
@@ -78,15 +85,37 @@ function _ghacp2om {
 			pluginDir=$_gh_helper_base/../$pluginName
 			if [ -d $pluginDir -a -d $pluginDir/.git ] ; then
 				pushd $pluginDir 1> /dev/null
-				ghacp2om
+				ghacp2om $message
 				popd 1> /dev/null
 			fi
 		else
 			if [ -d $dir -a -d $dir/.git ] ; then
 				pushd $dir 1> /dev/null
-				ghacp2om
+				ghacp2om $message
 				popd 1> /dev/null
 			fi
 		fi
 	fi
+}
+
+function _ghacp2om {		
+	while getopts ":m:" opt; do
+	  case $opt in
+	    m)
+	      	message=$OPTARG
+	      	;;
+	    \?)
+	      	echo "Invalid option: -$OPTARG" >&2
+	      	;;
+	    :)
+	      	echo "Option -$OPTARG requires an argument." >&2
+	      	;;
+	    *)
+			echo $OPTARG
+			;;
+	  esac
+	done
+
+	dir=${@:$OPTIND:1}
+	_ghacp2om_exec "$dir" "$message"
 }
