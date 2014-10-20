@@ -114,6 +114,6 @@ function _ghacp2om {
 	  esac
 	done
 
-	dir="${@:${OPTIND}:1}"
+	dir="${@:$OPTIND:1}"
 	_ghacp2om_exec "${dir}" "${message}"
 }
