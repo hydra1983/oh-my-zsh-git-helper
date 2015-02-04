@@ -42,7 +42,12 @@ function _git_remote_add {
 
 		echo "Add remote : [${remote}] ${remote_url}"
 		git remote add "${remote}" "${remote_url}"
-	fi	
+	fi
+}
+
+function ghac {
+	_git_helper_add_all
+	_git_helper_commit "$1"
 }
 
 function ghacp2all {
@@ -57,16 +62,16 @@ function ghacp2om {
 	_git_helper_push_2_origin_master
 }
 
-function ghrnep2om {
-	_git_helper_replace_name_email_push_2_origin_master "$1" "$2"
-}
-
 function ghrao {
 	_git_remote_add origin "$1"
 }
 
+function ghrnep2om {
+	_git_helper_replace_name_email_push_2_origin_master "$1" "$2"
+}
+
 function _ghacp2om_usage {
-	
+
 }
 
 function _ghacp2om_exec() {
@@ -96,7 +101,7 @@ function _ghacp2om_exec() {
 	fi
 }
 
-function _ghacp2om {		
+function _ghacp2om {
 	while getopts ":m:" opt; do
 	  case "${opt}" in
 	    m)
