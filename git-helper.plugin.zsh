@@ -62,6 +62,10 @@ function ghacp2om {
 	_git_helper_push_2_origin_master
 }
 
+function ghp2om {
+	_git_helper_push_2_origin_master
+}
+
 function ghrao {
 	_git_remote_add origin "$1"
 }
