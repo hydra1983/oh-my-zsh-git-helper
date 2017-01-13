@@ -21,6 +21,11 @@ function _git_helper_push_2_origin_master {
 	git push origin master
 }
 
+function _git_helper_push_2_origin_current_branch {
+	local readonly CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+	git push origin ${CURRENT_BRANCH}
+}
+
 function _git_helper_push_2_all {
 	git push origin --all
 }
@@ -60,6 +65,12 @@ function ghacp2om {
 	_git_helper_add_all
 	_git_helper_commit "$1"
 	_git_helper_push_2_origin_master
+}
+
+function ghacp2oc {
+	_git_helper_add_all
+	_git_helper_commit "$1"
+	_git_helper_push_2_origin_current_branch
 }
 
 function ghp2om {
