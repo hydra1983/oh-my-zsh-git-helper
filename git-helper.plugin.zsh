@@ -30,6 +30,15 @@ function _git_helper_push_2_all {
 	git push origin --all
 }
 
+function _git_helper_pull_from_upstream_master {
+	git pull origin master
+}
+
+function _git_helper_pull_from_upstream_current_branch {
+	local readonly CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+	git pull upstream ${CURRENT_BRANCH}
+}
+
 function _git_helper_replace_name_email_push_2_origin_master {
 	user_name="$1"
 	user_email="$2"
@@ -75,6 +84,14 @@ function ghacp2oc {
 
 function ghp2om {
 	_git_helper_push_2_origin_master
+}
+
+function ghp4um {
+	_git_helper_pull_from_upstream_master
+}
+
+function ghp4uc {
+	_git_helper_pull_from_upstream_current_branch
 }
 
 function ghrao {
