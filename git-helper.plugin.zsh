@@ -77,6 +77,10 @@ function _git_remote_add {
 	fi
 }
 
+function _git_helper_push_2_all_masters {
+	 git remote | xargs -I {} git push {} master
+}
+
 # function ghusage {
 	
 # }
@@ -108,6 +112,12 @@ function ghacp2uc {
 	_git_helper_add_all
 	_git_helper_commit "$1"
 	_git_helper_push_2_upstream_current_branch
+}
+
+function ghacp2am {
+	_git_helper_add_all
+	_git_helper_commit "$1"
+	_git_helper_push_2_all_masters
 }
 
 function ghp2om {
