@@ -81,6 +81,35 @@ function _git_helper_push_2_all_masters {
 	 git remote | xargs -I {} git push {} master
 }
 
+function _git_helper_remove_all_local_branches {
+	git ls-remote origin refs/heads/* | \
+		grep -v 'master' | \
+		sed -E 's|^.*(stable(-[0-9]+\.[0-9]+)?).*$|\1|' | \
+		xargs -I {} git branch -D {}
+}
+
+function _git_helper_remove_all_remote_branches {
+	git ls-remote origin refs/heads/* | \
+		grep -v 'master' | \
+		sed -E 's|^.*(stable(-[0-9]+\.[0-9]+)?).*$|\1|' | \
+		xargs -I {} git push origin :{}
+}
+
+function _git_helper_remove_all_local_tags {
+	git ls-remote origin "refs/tags/*" | \
+		sed -E 's|^.*(v[0-9]+\.[0-9]+\.[0-9]+).*$|\1|' | \
+		sort -uV | \
+		xargs -I {} git tag -d {}
+}
+
+function _git_helper_remove_all_remote_tags {
+	git ls-remote origin "refs/tags/*" | \
+		sed -E 's|^.*(v[0-9]+\.[0-9]+\.[0-9]+).*$|\1|' | \
+		sort -uV | \
+		xargs -I {} git push origin :{}
+}
+
+
 # function ghusage {
 	
 # }
@@ -150,4 +179,14 @@ function ghrao {
 
 function ghruo {
 	_git_remote_add upstream "$1"
+}
+
+function ghrmab {
+	_git_helper_remove_all_local_branches
+	_git_helper_remove_all_remote_branches
+}
+
+function ghrmat {
+	_git_helper_remove_all_local_tags
+	_git_helper_remove_all_remote_tags
 }
