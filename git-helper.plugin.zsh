@@ -84,11 +84,27 @@ function _git_helper_push_2_all_masters {
 function _git_helper_remove_all_local_branches {
 	git ls-remote origin refs/heads/* | \
 		grep -v 'master' | \
-		sed -E 's|^.*(stable(-[0-9]+\.[0-9]+)?).*$|\1|' | \
+		awk '{print $2}' | \
+		sed -E 's|^refs\/heads\/(.*)$|\1|' | \
 		xargs -I {} git branch -D {}
 }
 
 function _git_helper_remove_all_remote_branches {
+	git ls-remote origin refs/heads/* | \
+		grep -v 'master' | \
+		awk '{print $2}' | \
+		sed -E 's|^refs\/heads\/(.*)$|\1|' | \
+		xargs -I {} git push origin :{}
+}
+
+function _git_helper_remove_all_local_stable_branches {
+	git ls-remote origin refs/heads/* | \
+		grep -v 'master' | \
+		sed -E 's|^.*(stable(-[0-9]+\.[0-9]+)?).*$|\1|' | \
+		xargs -I {} git branch -D {}
+}
+
+function _git_helper_remove_all_remote_stable_branches {
 	git ls-remote origin refs/heads/* | \
 		grep -v 'master' | \
 		sed -E 's|^.*(stable(-[0-9]+\.[0-9]+)?).*$|\1|' | \
@@ -192,6 +208,11 @@ function ghruo {
 function ghrmab {
 	_git_helper_remove_all_local_branches
 	_git_helper_remove_all_remote_branches
+}
+
+function ghrmasb {
+	_git_helper_remove_all_local_stable_branches
+	_git_helper_remove_all_remote_stable_branches
 }
 
 function ghrmat {
