@@ -153,20 +153,28 @@ function ghp2om {
 	_git_helper_push_2_origin_master
 }
 
+function ghp2oc {
+	_git_helper_push_2_origin_current_branch
+}
+
 function ghp2um {
 	_git_helper_push_2_upstream_master
+}
+
+function ghp2uc {
+	_git_helper_push_2_upstream_current_branch
 }
 
 function ghp4om {
 	_git_helper_pull_from_origin_master
 }
 
-function ghp4um {
-	_git_helper_pull_from_upstream_master
-}
-
 function ghp4oc {
 	_git_helper_pull_from_origin_current_branch
+}
+
+function ghp4um {
+	_git_helper_pull_from_upstream_master
 }
 
 function ghp4uc {
