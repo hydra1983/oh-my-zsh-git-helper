@@ -250,6 +250,6 @@ function ghrmat {
 	_git_helper_remove_all_remote_tags
 }
 
-function ghdbo {
+function ghrmlob {
 	_git_helper_remove_local_origin_branch "$1"
 }
