@@ -125,7 +125,37 @@ function _git_helper_remove_all_remote_tags {
 		xargs -I {} git push origin :{}
 }
 
+function _git_helper_list_all_local_git_repos {
+	local dir git_conf_dir
+	dir="$1"
 
+	if [[ ! -d "${dir}" ]]; then
+		echo "${dir} is not a directory"
+		exit 1;
+	fi
+
+	git_conf_dir="$(find "${dir}" -d | grep -E "^${dir}/.git$")"
+	if [[ "${git_conf_dir}" != "" ]]; then
+		
+	fi
+}
+
+function _git_helper_remove_local_origin_branch {
+	local branchName
+	readonly branchName="$1"
+	
+	if [[ "$(git branch|grep '${branchName}')" != "" ]]; then
+		git branch -D "${branchName}"
+	fi
+
+	if [[ "$(git branch|grep 'origin/${branchName}')" != "" ]]; then
+		git branch -r -d "origin/${branchName}"
+	fi
+}
+
+########################################
+# exports
+########################################
 # function ghusage {
 	
 # }
@@ -218,4 +248,8 @@ function ghrmasb {
 function ghrmat {
 	_git_helper_remove_all_local_tags
 	_git_helper_remove_all_remote_tags
+}
+
+function ghdbo {
+	_git_helper_remove_local_origin_branch "$1"
 }
