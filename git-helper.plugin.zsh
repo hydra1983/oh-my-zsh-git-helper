@@ -143,13 +143,21 @@ function _git_helper_list_all_local_git_repos {
 function _git_helper_remove_local_origin_branch {
 	local branchName
 	readonly branchName="$1"
+
+	if [[ "${branchName}" == "" ]]; then
+		echo "Require 'branchName'"
+		exit 0
+	fi
 	
-	if [[ "$(git branch|grep '${branchName}')" != "" ]]; then
+	echo "Removing branch '${branchName}'"
+	if [[ "$(git branch|grep "${branchName}")" != "" ]]; then
 		git branch -D "${branchName}"
+		echo "Local branch '${branchName}' removed"
 	fi
 
-	if [[ "$(git branch|grep 'origin/${branchName}')" != "" ]]; then
+	if [[ "$(git branch|grep "origin/${branchName}")" != "" ]]; then
 		git branch -r -d "origin/${branchName}"
+		echo "Origin branch 'origin/${branchName}' removed"
 	fi
 }
 
