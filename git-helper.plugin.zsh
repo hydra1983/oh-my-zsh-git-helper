@@ -161,6 +161,18 @@ function _git_helper_remove_local_origin_branch {
 	fi
 }
 
+function _git_helper_checkout_track_branch_from_origin_master {
+	local branchName
+	readonly branchName="$1"
+
+	if [[ "${branchName}" == "" ]]; then
+		echo "Require 'branchName'"
+		exit 0
+	fi
+
+	git checkout --track -b "${branchName}" master
+}
+
 ########################################
 # exports
 ########################################
@@ -260,4 +272,8 @@ function ghrmat {
 
 function ghrmlob {
 	_git_helper_remove_local_origin_branch "$1"
+}
+
+function ghctb4m {
+	_git_helper_checkout_track_branch_from_master "$1"
 }
