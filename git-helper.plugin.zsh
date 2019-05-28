@@ -161,7 +161,7 @@ function _git_helper_remove_local_origin_branch {
 	fi
 }
 
-function _git_helper_checkout_track_branch_from_origin_master {
+function _git_helper_checkout_track_branch_from_master {
 	local branchName
 	readonly branchName="$1"
 
