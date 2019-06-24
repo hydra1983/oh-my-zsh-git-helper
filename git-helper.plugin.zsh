@@ -155,7 +155,7 @@ function _git_helper_remove_local_origin_branch {
 		echo "Local branch '${branchName}' removed"
 	fi
 
-	if [[ "$(git branch|grep "origin/${branchName}")" != "" ]]; then
+	if [[ "$(git branch -a|grep "origin/${branchName}")" != "" ]]; then
 		git branch -r -d "origin/${branchName}"
 		echo "Origin branch 'origin/${branchName}' removed"
 	fi
