@@ -40,21 +40,21 @@ function _git_helper_push_2_upstream_current_branch {
 # }
 
 function _git_helper_pull_from_origin_master {
-	git pull origin master
+	git pull --rebase origin master
 }
 
 function _git_helper_pull_from_origin_current_branch {
 	local readonly CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-	git pull origin ${CURRENT_BRANCH}
+	git pull --rebase origin ${CURRENT_BRANCH}
 }
 
 function _git_helper_pull_from_upstream_master {
-	git pull upstream master
+	git pull --rebase upstream master
 }
 
 function _git_helper_pull_from_upstream_current_branch {
 	local readonly CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-	git pull upstream ${CURRENT_BRANCH}
+	git pull --rebase upstream ${CURRENT_BRANCH}
 }
 
 # function _git_helper_replace_name_email_push_2_origin_master {
